@@ -1,0 +1,44 @@
+.movies{
+    background-color: $darkGray;
+}
+.movies__list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.movies__card{
+    margin-top: 70px;
+    width: 220px;
+    border: solid 2px rgb(255, 255, 255);
+    box-shadow: 0 0 35px rgb(0, 0, 0);
+    border-radius: 15px;
+    background-color: rgb(43, 43, 43);
+    transition: box-shadow 0.2s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+
+    img{
+        width: 100%;
+        border-radius: 15px;
+    }
+    .card__info{
+        margin-top: px;
+        padding: 10px;
+    }
+}
+
+.movies__card:hover{
+    border: thick double #ffc400;
+    transform: translateY(-15px);
+    box-shadow: 0 0 25px rgb(252, 255, 67);
+    background-color: rgb(22, 22, 22);
+}
+
+.modal-dialog{
+    width: 900px !important;
+    max-width: 900px;
+}
+
+

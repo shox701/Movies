@@ -1,0 +1,13 @@
+.hero{
+    height: 700px;
+    overflow: hidden;
+    img{
+      height: 700px;
+      object-fit: cover;
+    }
+  }
+  @media (max-width: 916px) {
+    .hero{
+      display: none;
+    }
+  }

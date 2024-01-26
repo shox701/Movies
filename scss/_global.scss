@@ -1,0 +1,27 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+  font-family: 'DM Sans', sans-serif;
+}
+ul,ol{
+  list-style-type: none;
+  padding-left: 0;
+}
+a{
+  text-decoration: none;
+}
+p{
+  margin-bottom: 0 !important;
+}
+.container{
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
