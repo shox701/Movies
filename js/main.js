@@ -25,7 +25,7 @@ function fnRender(data) {
         .join("")}</p>
       <div class="d-flex align-items-center justify-content-between text-light">
         <button onclick="fnMoreInfo('${item.ytid}')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">more</button>
-        <i class="bi bi-heart"></i>
+        <i onclick="fnAddLocData('${item.ytid}')" class="bi bi-heart"></i>
       </div>
     </div>
   </div>`
@@ -104,3 +104,31 @@ function fnMoreInfo(id){
   </div>
   `
 }
+
+let elFavMov = document.querySelector('.favourite__move')
+let locData = []
+function fnAddLocData(id){
+    let item = partMovies.find(i=> i.ytid == id)
+    locData.push(item)
+    console.log(locData);
+    window.localStorage.setItem('locdata', JSON.stringify(locData))
+}
+
+function fnRenLoc(){
+  let favouritMovie = JSON.parse(window.localStorage.getItem('locdata'))
+  favouritMovie.forEach((item)=>{
+    let newLI = document.createElement('li')
+    newLI.innerHTML = `
+    <div class="border-1 d-flex align-items-center"> 
+      <img height="80" src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
+      <p class="ms-3">${item.Title.toString()
+        .split("")
+        .slice(0, 12)
+        .join("")}</p>
+    </div>
+    `
+    elFavMov.appendChild(newLI)
+  })
+}
+
+fnRenLoc()

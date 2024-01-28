@@ -13,7 +13,7 @@
   <header>
     <nav class="navbar navbar-expand-lg  d-flex align-items-center">
       <div class="container">
-        <button class="bg-transparent text-light border-0 me-4 fs-3">
+        <button class="bg-transparent text-light border-0 me-4 fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
           <i class="bi bi-list"></i>
         </button>
         <a class="navbar-brand" href="#">
@@ -51,6 +51,15 @@
       </div>
     </nav>
   </header>
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <ul class="offcanvas-body favourite__move">
+
+  </ul>
+</div>
   <section class="hero">
     <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
@@ -65,6 +74,11 @@
         </div>
         <div class="carousel-item">
           <img src="./img/banner4.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./img/banner5.jpg" class="d-block w-100" alt="...">
+        </div>        <div class="carousel-item">
+          <img src="./img/banner6.jpg" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -106,7 +120,7 @@
         <iframe width="100%" height="400" src="https://www.youtube.com/embed/Tcwtq9NrVd4" title="iPhone 15 Plus Battery | One More | Apple" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis sequi iste alias officiis ipsam optio minima accusamus repudiandae veniam aspernatur? Quaerat magnam, non saepe cupiditate tempore aspernatur at autem quos.</p>
       </div>
-      <div class="modal-footer d-flex align-item-center justify-content-between">
+      <div class="modal-footer d-flex align-items-center justify-content-between">
         <span class="d-flex align-items-center">
           <p>70</p>
           <p class="ms-3 bg-success p-2 ">Categories</p>
