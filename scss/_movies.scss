@@ -12,7 +12,7 @@
 .movies__card{
     margin-top: 70px;
     width: 220px;
-    border: solid 2px rgb(255, 255, 255);
+    border: solid 2px rgb(51, 255, 0);
     box-shadow: 0 0 35px rgb(0, 0, 0);
     border-radius: 15px;
     background-color: rgb(43, 43, 43);
@@ -30,15 +30,24 @@
 }
 
 .movies__card:hover{
-    border: thick double #ffc400;
-    transform: translateY(-15px);
-    box-shadow: 0 0 25px rgb(252, 255, 67);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgb(57, 255, 7);
     background-color: rgb(22, 22, 22);
+    border: ridge 3px rgb(81, 255, 0);
 }
 
 .modal-dialog{
     width: 900px !important;
     max-width: 900px;
+}
+
+.favourite__move{
+    li{
+        margin-top: 15px;
+    }
+    div{
+        cursor: pointer;
+    }
 }
 
 
