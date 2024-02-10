@@ -1,8 +1,9 @@
 let elMovList = document.querySelector('.movies__list')
 let partMovies = movies.slice(0, 100)
 fnRender(partMovies)
-function fnRender(data){
-  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
+
+function fnRender(data) {
+  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata')) || []; // Добавлено условие по умолчанию, если данных нет в localStorage
   elMovList.innerHTML = ''
   data.forEach((item, index) => {
     let newLi = document.createElement('li')
