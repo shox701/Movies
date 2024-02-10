@@ -2,8 +2,10 @@ let elMovList = document.querySelector('.movies__list')
 let partMovies = movies.slice(0, 100)
 fnRender(partMovies)
 
+let count = 0; // Объявляем переменную count здесь
+
 function fnRender(data) {
-  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata')) || []; // Добавлено условие по умолчанию, если данных нет в localStorage
+  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata')) || [];
   elMovList.innerHTML = ''
   data.forEach((item, index) => {
     let newLi = document.createElement('li')
@@ -153,7 +155,7 @@ function pauseVideo(){
     },500)
 }
 
-let count = 0
+let countt = 0
 function partPagenation(part){
   count = part
   fnRender(partMovies.slice((part - 1) * 10,part * 10));
