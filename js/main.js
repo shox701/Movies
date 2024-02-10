@@ -1,7 +1,11 @@
-let elMovList = document.querySelector('.movies__list')
-let partMovies = movies.slice(0, 100)
-fnRender(partMovies)
+let elMovList = document.querySelector('.movies__list');
+
 function fnRender(data){
+  if (!elMovList) {
+    console.error('Element with class .movies__list not found');
+    return;
+  }
+
   let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
   elMovList.innerHTML = ''
   data.forEach((item, index) => {
@@ -147,6 +151,7 @@ function fnRenLoc(){
     console.error('Element with class .favourite__move not found');
   }
 }
+fnRenLoc()
 
 function pauseVideo(){
     var youtubePlayer = document.getElementById('youtubePlayer');
