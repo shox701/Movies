@@ -1,12 +1,13 @@
-let elMovList = document.querySelector('.movies__list')
-let partMovies = movies.slice(0, 100)
-fnRender(partMovies)
-function fnRender(data){
-  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
-  elMovList.innerHTML = ''
+let elMovList = document.querySelector('.movies__list');
+let partMovies = movies.slice(0, 100);
+fnRender(partMovies);
+
+function fnRender(data) {
+  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'));
+  elMovList.innerHTML = '';
   data.forEach((item, index) => {
-    let newLi = document.createElement('li')
-    newLi.classList = "movies__item"
+    let newLi = document.createElement('li');
+    newLi.classList = "movies__item";
     newLi.innerHTML = `
     <div class="movies__card">
     <img src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
@@ -31,57 +32,56 @@ function fnRender(data){
         "bi bi-heart"}"></i>
       </div>
     </div>
-  </div>`
-    elMovList.appendChild(newLi)
-  })
+  </div>`;
+    elMovList.appendChild(newLi);
+  });
 }
 
 function fnYear(value) {
   console.log(value);
   if (value == "New") {
-    fnRender(partMovies.sort((a, b) => b.movie_year - a.movie_year))
+    fnRender(partMovies.sort((a, b) => b.movie_year - a.movie_year));
   } else {
-    fnRender(partMovies.sort((a, b) => a.movie_year - b.movie_year))
+    fnRender(partMovies.sort((a, b) => a.movie_year - b.movie_year));
   }
 }
 
 function fnRating(value) {
   console.log(value);
   if (value == "Max") {
-    fnRender(partMovies.sort((a, b) => b.imdb_rating - a.imdb_rating))
+    fnRender(partMovies.sort((a, b) => b.imdb_rating - a.imdb_rating));
   } else {
-    fnRender(partMovies.sort((a, b) => a.imdb_rating - b.imdb_rating))
+    fnRender(partMovies.sort((a, b) => a.imdb_rating - b.imdb_rating));
   }
 }
 
-let arrCategory = []
+let arrCategory = [];
 partMovies.forEach((item) => {
   if (!arrCategory.includes(item.Categories)) {
     arrCategory.push(item.Categories);
   }
-})
+});
 arrCategory.forEach((item) => {
-  let newOption = document.createElement('option')
-  newOption.textContent = item
-  document.querySelector('.sel__category').appendChild(newOption)
-})
+  let newOption = document.createElement('option');
+  newOption.textContent = item;
+  document.querySelector('.sel__category').appendChild(newOption);
+});
 
 function fnCategory(value) {
-  let filMov = partMovies.filter((item) => item.Categories == value)
-  fnRender(filMov)
+  let filMov = partMovies.filter((item) => item.Categories == value);
+  fnRender(filMov);
   if (filMov.length <= 3) {
     elMovList.style.justifyContent = 'space-around';
   }
 }
 
 function fnSearch(event) {
-  event.preventDefault()
-  let val = event.target.title.value
-  fnRender(partMovies.filter((item) => item.Title.toString().toLowerCase().
-  includes(val.toLowerCase())))
+  event.preventDefault();
+  let val = event.target.title.value;
+  fnRender(partMovies.filter((item) => item.Title.toString().toLowerCase().includes(val.toLowerCase())));
 }
 
-let elModalDialog = document.querySelector(".modal-dialog")
+let elModalDialog = document.querySelector(".modal-dialog");
 function fnMoreInfo(id){
   let item = partMovies.find(i=> i.ytid == id);
   elModalDialog.innerHTML =
@@ -91,7 +91,7 @@ function fnMoreInfo(id){
       <button onclick="pauseVideo()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body " id="youtubePlayer">
-      <iframe  width="100%" height="400" src="https://www.youtube.com/embed/${item.ytid}" title="КОГДА НОВЫЙ ВОЗВРАТ UC?! УТЕЧКИ НОВОЙ КОЛЛАБОРАЦИИ?! ТРАНСФОРМЕРЫ В PUBG MOBILE?!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe  width="100%" height="400" src="https://www.youtube.com/embed/${item.ytid}" title="Movie Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       <p>${item.summary}</p>
     </div>
     <div class="modal-footer d-flex align-items-center justify-content-between">
@@ -105,31 +105,31 @@ function fnMoreInfo(id){
       </span>
     </div>
   </div>
-  `
+  `;
 }
 
-let elFavMov = document.querySelector('.favourite__move')
-let locData = []
+let elFavMov = document.querySelector('.favourite__move');
+let locData = [];
 function fnAddLocData(id){
     if(window.localStorage.getItem('locdata')){
-    locData = JSON.parse(window.localStorage.getItem('locdata'))
+    locData = JSON.parse(window.localStorage.getItem('locdata'));
     }
-    let item = partMovies.find(i=> i.ytid == id)
+    let item = partMovies.find(i=> i.ytid == id);
     if(locData.find((i)=> i.ytid == item.ytid)){
-      window.localStorage.setItem('locdata', JSON.stringify(locData.filter((k)=> k.ytid != id)))
+      window.localStorage.setItem('locdata', JSON.stringify(locData.filter((k)=> k.ytid != id)));
     }else{
-    locData.push(item)
-    window.localStorage.setItem('locdata', JSON.stringify(locData))
+    locData.push(item);
+    window.localStorage.setItem('locdata', JSON.stringify(locData));
     }
-    fnRender(partMovies)
+    fnRender(partMovies);
 
 }
 
 function fnRenLoc(){
-  elFavMov.innerHTML = ''
-  let favouritMovie = JSON.parse(window.localStorage.getItem('locdata'))
+  elFavMov.innerHTML = '';
+  let favouritMovie = JSON.parse(window.localStorage.getItem('locdata'));
   favouritMovie.forEach((item)=>{
-    let newLI = document.createElement('li')
+    let newLI = document.createElement('li');
     newLI.innerHTML = `
     <div class="border-1 d-flex align-items-center" onclick="fnMoreInfo('${item.ytid}')" 
     data-bs-toggle="modal" data-bs-target="#exampleModal"> 
@@ -139,38 +139,38 @@ function fnRenLoc(){
         .slice(0, 12)
         .join("")}</p>
         </div>
-    `
-    elFavMov.appendChild(newLI)
-  })
+    `;
+    elFavMov.appendChild(newLI);
+  });
 }
-fnRenLoc()
+fnRenLoc();
 
 function pauseVideo(){
     var youtubePlayer = document.getElementById('youtubePlayer');
     setTimeout(()=>{
-      youtubePlayer.innerHTML = ''
-    },500)
+      youtubePlayer.innerHTML = '';
+    },500);
 }
 
-let count = 0
+let count = 0;
 function partPagenation(part){
-  count = part
+  count = part;
   fnRender(partMovies.slice((part - 1) * 10,part * 10));
 }
 
 function fnPagenation(val){
   if(val == 'prev' && count >= 2){
     fnRender(partMovies.slice((count - 2) * 10,(count-1) * 10));
-    count = count - 1
+    count = count - 1;
   }else if(val == 'next'){
     fnRender(partMovies.slice(count * 10,(count + 1) * 10));
-    count = count + 1
+    count = count + 1;
   }
 }
 
-for(let i = 1; i<= partMovies.length / 10; i++){
+for(let i = 1; i<= Math.ceil(partMovies.length / 10); i++){
     document.querySelector('.pagenation__inner').innerHTML += `
     <li class="page-item"><button onclick="partPagenation(${i})"
     class="page-link bg-light text-black fw-bold">${i}</button></li>
-      `
+      `;
 }
