@@ -128,23 +128,25 @@ function fnAddLocData(id){
 
 }
 
-function fnRenLoc(){
+function fnRenLoc() {
   elFavMov.innerHTML = ''
-  let favouritMovie = JSON.parse(window.localStorage.getItem('locdata'))
-  favouritMovie.forEach((item)=>{
-    let newLI = document.createElement('li')
-    newLI.innerHTML = `
-    <div class="border-1 d-flex align-items-center" onclick="fnMoreInfo('${item.ytid}')" 
-    data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-      <img height="80" src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
-      <p class="ms-3">${item.Title.toString()
-        .split("")
-        .slice(0, 12)
-        .join("")}</p>
-        </div>
-    `
-    elFavMov.appendChild(newLI)
-  })
+  let favouritMovie = JSON.parse(window.localStorage.getItem('locdata')) || []; // Добавляем проверку на null
+  if (favouritMovie !== null) { // Добавляем дополнительную проверку
+    favouritMovie.forEach((item) => {
+      let newLI = document.createElement('li')
+      newLI.innerHTML = `
+        <div class="border-1 d-flex align-items-center" onclick="fnMoreInfo('${item.ytid}')" 
+        data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+          <img height="80" src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
+          <p class="ms-3">${item.Title.toString()
+            .split("")
+            .slice(0, 12)
+            .join("")}</p>
+            </div>
+        `
+      elFavMov.appendChild(newLI)
+    })
+  }
 }
 fnRenLoc()
 
