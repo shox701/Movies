@@ -1,11 +1,7 @@
-let elMovList = document.querySelector('.movies__list');
-
+let elMovList = document.querySelector('.movies__list')
+let partMovies = movies.slice(0, 100)
+fnRender(partMovies)
 function fnRender(data){
-  if (!elMovList) {
-    console.error('Element with class .movies__list not found');
-    return;
-  }
-
   let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
   elMovList.innerHTML = ''
   data.forEach((item, index) => {
