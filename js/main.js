@@ -1,39 +1,39 @@
 let elMovList = document.querySelector('.movies__list')
 let partMovies = movies.slice(0, 100)
 fnRender(partMovies)
-function fnRender(data){
-  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
-  elMovList.innerHTML = ''
+function fnRender(data) {
+  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata')) || []; // Устанавливаем значение по умолчанию в пустой массив, если 'locdata' отсутствует
+  elMovList.innerHTML = '';
   data.forEach((item, index) => {
-    let newLi = document.createElement('li')
-    newLi.classList = "movies__item"
-    newLi.innerHTML = `
-    <div class="movies__card">
-    <img src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
-    <div class="card__info">
-      <h3 class="text-light">${item.Title.toString()
-        .split("")
-        .slice(0, 12)
-        .join("")}</h3>
-      <div class="d-flex align-items-center justify-content-between fs-4">
-        <p class="text-secondary">${item.movie_year}</p>
-        <b class="text-secondary text-warning">${item.imdb_rating}</b>
-      </div>
-        <p class="fs-4 text-light">${item.Categories
-        .toString()
-        .split("")
-        .slice(0, 15)
-        .join("")}</p>
-      <div class="d-flex align-items-center justify-content-between text-light">
-        <button onclick="fnMoreInfo('${item.ytid}')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">more</button>
-        <i onclick="fnAddLocData('${item.ytid}')" 
-        class="${arrLocDataHeart.find((i)=>i.ytid == item.ytid) ? "bi bi-heart-fill": 
-        "bi bi-heart"}"></i>
-      </div>
-    </div>
-  </div>`
-    elMovList.appendChild(newLi)
-  })
+      let newLi = document.createElement('li');
+      newLi.classList = "movies__item";
+      newLi.innerHTML = `
+          <div class="movies__card">
+              <img src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
+              <div class="card__info">
+                  <h3 class="text-light">${item.Title.toString()
+          .split("")
+          .slice(0, 12)
+          .join("")}</h3>
+                  <div class="d-flex align-items-center justify-content-between fs-4">
+                      <p class="text-secondary">${item.movie_year}</p>
+                      <b class="text-secondary text-warning">${item.imdb_rating}</b>
+                  </div>
+                  <p class="fs-4 text-light">${item.Categories
+          .toString()
+          .split("")
+          .slice(0, 15)
+          .join("")}</p>
+                  <div class="d-flex align-items-center justify-content-between text-light">
+                      <button onclick="fnMoreInfo('${item.ytid}')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">more</button>
+                      <i onclick="fnAddLocData('${item.ytid}')" 
+                      class="${arrLocDataHeart.find((i) => i.ytid == item.ytid) ? "bi bi-heart-fill": 
+                      "bi bi-heart"}"></i>
+                  </div>
+              </div>
+          </div>`;
+      elMovList.appendChild(newLi);
+  });
 }
 
 function fnYear(value) {
