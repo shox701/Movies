@@ -163,20 +163,17 @@ function partPagenation(part){
   fnRender(partMovies.slice((part - 1) * 10,part * 10));
 }
 
-function fnPagenation(val){
-  if(val == 'prev' && count >= 2){
-    let startIndex = (count - 2) * 10;
-    let endIndex = (count - 1) * 10;
-    if (startIndex < 0) {
-      startIndex = 0; 
-    }
-    fnRender(partMovies.slice(startIndex, endIndex));
+function fnPagenation(val) {
+  if (val === 'prev' && count > 1) {
     count = count - 1;
-  } else if(val == 'next'){
-    fnRender(partMovies.slice(count * 10,(count + 1) * 10));
+  } else if (val === 'next') {
     count = count + 1;
   }
+  let startIndex = (count - 1) * 10;
+  let endIndex = count * 10;
+  fnRender(partMovies.slice(startIndex, endIndex));
 }
+
 for(let i = 1; i<= partMovies.length / 10; i++){
     document.querySelector('.pagenation__inner').innerHTML += `
     <li class="page-item"><button onclick="partPagenation(${i})"
