@@ -1,75 +1,85 @@
-// Оптимизированный JavaScript код
-document.addEventListener('DOMContentLoaded', function () {
-  // Код здесь будет выполнен после полной загрузки DOM
+let elMovList = document.querySelector('.movies__list')
+let partMovies = movies.slice(0, 100)
+fnRender(partMovies)
+function fnRender(data){
+  let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'))
+  elMovList.innerHTML = ''
+  data.forEach((item, index) => {
+    let newLi = document.createElement('li')
+    newLi.classList = "movies__item"
+    newLi.innerHTML = `
+    <div class="movies__card">
+    <img src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
+    <div class="card__info">
+      <h3 class="text-light">${item.Title.toString()
+        .split("")
+        .slice(0, 12)
+        .join("")}</h3>
+      <div class="d-flex align-items-center justify-content-between fs-4">
+        <p class="text-secondary">${item.movie_year}</p>
+        <b class="text-secondary text-warning">${item.imdb_rating}</b>
+      </div>
+        <p class="fs-4 text-light">${item.Categories
+        .toString()
+        .split("")
+        .slice(0, 15)
+        .join("")}</p>
+      <div class="d-flex align-items-center justify-content-between text-light">
+        <button onclick="fnMoreInfo('${item.ytid}')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">more</button>
+        <i onclick="fnAddLocData('${item.ytid}')" 
+        class="${arrLocDataHeart.find((i)=>i.ytid == item.ytid) ? "bi bi-heart-fill": 
+        "bi bi-heart"}"></i>
+      </div>
+    </div>
+  </div>`
+    elMovList.appendChild(newLi)
+  })
+}
 
-  let elMovList = document.querySelector('.movies__list');
-  let partMovies = movies.slice(0, 100);
-
-  function fnRender(data) {
-    let arrLocDataHeart = JSON.parse(window.localStorage.getItem('locdata'));
-    elMovList.innerHTML = '';
-    data.forEach((item, index) => {
-      let newLi = document.createElement('li');
-      newLi.classList.add('movies__item');
-      newLi.innerHTML = `
-        <div class="movies__card">
-          <img src="https://i.ytimg.com/vi/${item.ytid}/hqdefault.jpg?" alt="">
-          <div class="card__info">
-            <h3 class="text-light">${item.Title.slice(0, 12)}</h3>
-            <div class="d-flex align-items-center justify-content-between fs-4">
-              <p class="text-secondary">${item.movie_year}</p>
-              <b class="text-secondary text-warning">${item.imdb_rating}</b>
-            </div>
-            <p class="fs-4 text-light">${item.Categories.slice(0, 15)}</p>
-            <div class="d-flex align-items-center justify-content-between text-light">
-              <button onclick="fnMoreInfo('${item.ytid}')" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">more</button>
-              <i onclick="fnAddLocData('${item.ytid}')" class="bi ${arrLocDataHeart.find(i => i.ytid === item.ytid) ? 'bi-heart-fill' : 'bi-heart'}"></i>
-            </div>
-          </div>
-        </div>`;
-      elMovList.appendChild(newLi);
-    });
+function fnYear(value) {
+  console.log(value);
+  if (value == "New") {
+    fnRender(partMovies.sort((a, b) => b.movie_year - a.movie_year))
+  } else {
+    fnRender(partMovies.sort((a, b) => a.movie_year - b.movie_year))
   }
+}
 
-  function fnYear(value) {
-    let sortedMovies = value === 'New' ? partMovies.slice().sort((a, b) => b.movie_year - a.movie_year) : partMovies.slice().sort((a, b) => a.movie_year - b.movie_year);
-    fnRender(sortedMovies);
+function fnRating(value) {
+  console.log(value);
+  if (value == "Max") {
+    fnRender(partMovies.sort((a, b) => b.imdb_rating - a.imdb_rating))
+  } else {
+    fnRender(partMovies.sort((a, b) => a.imdb_rating - b.imdb_rating))
   }
+}
 
-  function fnRating(value) {
-    let sortedMovies = value === 'Max' ? partMovies.slice().sort((a, b) => b.imdb_rating - a.imdb_rating) : partMovies.slice().sort((a, b) => a.imdb_rating - b.imdb_rating);
-    fnRender(sortedMovies);
+let arrCategory = []
+partMovies.forEach((item) => {
+  if (!arrCategory.includes(item.Categories)) {
+    arrCategory.push(item.Categories);
   }
-
-  let arrCategory = [];
-  partMovies.forEach(item => {
-    if (!arrCategory.includes(item.Categories)) {
-      arrCategory.push(item.Categories);
-    }
-  });
-  let selCategory = document.querySelector('.sel__category');
-  arrCategory.forEach(item => {
-    let newOption = document.createElement('option');
-    newOption.textContent = item;
-    selCategory.appendChild(newOption);
-  });
-
-  function fnCategory(value) {
-    let filteredMovies = partMovies.filter(item => item.Categories === value);
-    fnRender(filteredMovies);
-    if (filteredMovies.length <= 3) {
-      elMovList.style.justifyContent = 'space-around';
-    }
-  }
-
-  function fnSearch(event) {
-    event.preventDefault();
-    let val = event.target.title.value;
-    fnRender(partMovies.filter(item => item.Title.toLowerCase().includes(val.toLowerCase())));
-  }
-
-  // Остальные функции оставим без изменений
 })
+arrCategory.forEach((item) => {
+  let newOption = document.createElement('option')
+  newOption.textContent = item
+  document.querySelector('.sel__category').appendChild(newOption)
+})
+
+function fnCategory(value) {
+  let filMov = partMovies.filter((item) => item.Categories == value)
+  fnRender(filMov)
+  if (filMov.length <= 3) {
+    elMovList.style.justifyContent = 'space-around';
+  }
+}
+
+function fnSearch(event) {
+  event.preventDefault()
+  let val = event.target.title.value
+  fnRender(partMovies.filter((item) => item.Title.toString().toLowerCase().
+  includes(val.toLowerCase())))
+}
 
 let elModalDialog = document.querySelector(".modal-dialog")
 function fnMoreInfo(id){
