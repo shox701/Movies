@@ -147,7 +147,6 @@ function fnRenLoc(){
     console.error('Element with class .favourite__move not found');
   }
 }
-fnRenLoc()
 
 function pauseVideo(){
     var youtubePlayer = document.getElementById('youtubePlayer');
